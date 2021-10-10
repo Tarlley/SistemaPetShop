@@ -3,11 +3,14 @@ package br.com.devtarlley.DenguinhosPetShop.domains;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @AllArgsConstructor
@@ -23,7 +26,7 @@ public class Pet {
     private Integer id;
     private String nome;
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private Date idadeProvavel;
+    private Date nascimento;
 
 
 
@@ -31,12 +34,19 @@ public class Pet {
     @JoinColumn(name = "especie_pet_id")
     private Especie especie_pet;
 
-//    public Pet(Integer id, String nome, Date idadeProvavel, Especie especie) {
-//        this.id = id;
-//        this.nome = nome;
-//        this.idadeProvavel = idadeProvavel;
-//        this.especie = especie;
-//    }
+    @JsonIgnore
+    @ManyToMany(mappedBy = "pets")
+    @ToString.Exclude
+    private List<Proprietario> proprietarios = new ArrayList<>();
+
+//
+
+    public Pet(Integer id, String nome, Date nascimento, Especie especie_pet) {
+        this.id = id;
+        this.nome = nome;
+        this.nascimento = nascimento;
+        this.especie_pet = especie_pet;
+    }
 
     @Override
     public boolean equals(Object o) {

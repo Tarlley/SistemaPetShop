@@ -1,7 +1,6 @@
 package br.com.devtarlley.DenguinhosPetShop.services;
 
 import br.com.devtarlley.DenguinhosPetShop.domains.Pet;
-import br.com.devtarlley.DenguinhosPetShop.repository.CategoriaRepository;
 import br.com.devtarlley.DenguinhosPetShop.repository.PetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,16 +12,16 @@ import java.util.Optional;
 public class PetService {
 
     @Autowired
-    private PetRepository repository;
+    private PetRepository petRepository;
 
     public Pet find(Integer id){
 
-        Optional<Pet> object = repository.findById(id);
+        Optional<Pet> object = petRepository.findById(id);
         return object.orElse(null);
     }
 
     public List<Pet> findAll(){
-        List<Pet> object = repository.findAll();
+        List<Pet> object = petRepository.findAll();
         return object;
     }
 }
