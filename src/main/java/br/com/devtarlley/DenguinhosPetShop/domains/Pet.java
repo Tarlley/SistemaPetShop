@@ -39,13 +39,20 @@ public class Pet {
     @ToString.Exclude
     private List<Proprietario> proprietarios = new ArrayList<>();
 
-//
 
-    public Pet(Integer id, String nome, Date nascimento, Especie especie_pet) {
+   @ManyToOne
+   @JoinColumn(name = "endereco_entrega_id")
+   private Endereco enderecoEntrega;
+
+//4
+
+    public Pet(Integer id, String nome, Date nascimento, Especie especie_pet, Endereco enderecoEntrega) {
         this.id = id;
         this.nome = nome;
         this.nascimento = nascimento;
         this.especie_pet = especie_pet;
+        this.enderecoEntrega = enderecoEntrega;
+
     }
 
     @Override

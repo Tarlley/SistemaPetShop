@@ -6,9 +6,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @AllArgsConstructor @NoArgsConstructor
 @Getter @Setter
@@ -30,6 +28,11 @@ public class Proprietario {
     joinColumns = @JoinColumn(name = "proprietario_id"),
     inverseJoinColumns = @JoinColumn(name = "pets_id"))
     private List<Pet> pets = new ArrayList<>();
+
+     @ElementCollection
+     @CollectionTable(name = "Telefone")
+     private Set<String> telefones = new HashSet<>();
+
 
     public Proprietario(Integer id, String CPF, String nome, String email) {
         this.id = id;
