@@ -35,13 +35,14 @@ public class Endereco {
     private Cidade cidade;
 
 
-    public Endereco(Integer id, String logradouro, String numero, String complemento, String bairro, String cep) {
+    public Endereco(Integer id, String logradouro, String numero, String complemento, String bairro, String cep, Cidade cidade) {
         this.id = id;
         this.logradouro = logradouro;
         this.numero = numero;
         this.complemento = complemento;
         this.bairro = bairro;
         this.cep = cep;
+        this.cidade = cidade;
     }
 
     @Override

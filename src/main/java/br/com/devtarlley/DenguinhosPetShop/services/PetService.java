@@ -21,7 +21,6 @@ public class PetService {
     }
 
     public List<Pet> findAll(){
-        List<Pet> object = petRepository.findAll();
-        return object;
+        return petRepository.findAll();
     }
 }

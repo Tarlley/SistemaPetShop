@@ -9,38 +9,35 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@NoArgsConstructor @AllArgsConstructor
+@AllArgsConstructor @NoArgsConstructor
 @Getter @Setter
 @ToString
+
 @Entity
-public class Cidade {
+public class Categoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
 
+
     @JsonIgnore
-    @OneToMany(mappedBy = "cidade" )
+    @OneToMany(mappedBy = "categoria")
     @ToString.Exclude
-    private List<Endereco> enderecos = new ArrayList<>();
+    private List<Item> itens = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "estado_id")
-    private Estado estado;
-
-    public Cidade(Integer id, String nome, Estado estado) {
+    public Categoria(Integer id, String nome) {
         this.id = id;
         this.nome = nome;
-        this.estado = estado;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Cidade cidade = (Cidade) o;
-        return Objects.equals(id, cidade.id);
+        Categoria categoria = (Categoria) o;
+        return Objects.equals(id, categoria.id);
     }
 
     @Override
