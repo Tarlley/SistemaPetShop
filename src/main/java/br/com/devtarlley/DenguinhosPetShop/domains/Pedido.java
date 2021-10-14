@@ -2,16 +2,15 @@ package br.com.devtarlley.DenguinhosPetShop.domains;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
+import org.hibernate.Hibernate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
 @NoArgsConstructor @AllArgsConstructor
 @Getter @Setter
-@Data
+@ToString
 @Entity
 public class Pedido {
 
@@ -22,5 +21,34 @@ public class Pedido {
      @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
      private Date instante;
 
+     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
+     private Pagamento pagamento;
 
+     @ManyToOne
+     @JoinColumn(name = "proprietario_id")
+     private Proprietario proprietario;
+
+     @ManyToOne
+     @JoinColumn(name = "endereco_entrega_id")
+     private Endereco endereco;
+
+     public Pedido(Integer id, Date instante, Proprietario proprietario, Endereco endereco) {
+          this.id = id;
+          this.instante = instante;
+          this.proprietario = proprietario;
+          this.endereco = endereco;
+     }
+
+     @Override
+     public boolean equals(Object o) {
+          if (this == o) return true;
+          if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+          Pedido pedido = (Pedido) o;
+          return Objects.equals(id, pedido.id);
+     }
+
+     @Override
+     public int hashCode() {
+          return 0;
+     }
 }

@@ -1,6 +1,7 @@
 package br.com.devtarlley.DenguinhosPetShop;
 
 import br.com.devtarlley.DenguinhosPetShop.domains.*;
+import br.com.devtarlley.DenguinhosPetShop.domains.Enum.EstadoPagamento;
 import br.com.devtarlley.DenguinhosPetShop.domains.Enum.Tipo;
 import br.com.devtarlley.DenguinhosPetShop.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 @SpringBootApplication
@@ -42,6 +45,12 @@ public class DenguinhosPetShopApplication implements CommandLineRunner {
 
 	@Autowired
 	private CategoriaRepository categoriaRepository;
+
+	@Autowired
+	private PedidoRepository pedidoRepository;
+
+	@Autowired
+	private PagamentoRepository pagamentoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DenguinhosPetShopApplication.class, args);
@@ -107,8 +116,16 @@ public class DenguinhosPetShopApplication implements CommandLineRunner {
 		pet1.getProprietarios().addAll(List.of(prop1));
 		pet2.getProprietarios().addAll(List.of(prop2));
 
+		Date dataAtual = new Date();
+		String nowDate = sdf.format(dataAtual);
 
+		Pedido ped1 = new Pedido(null,sdf.parse(nowDate),prop2,end1);
+		Pedido ped2 = new Pedido(null,sdf.parse("30/09/2017 10:32"),prop1,end2);
 
+		Pagamento pagto1 = new PagamentoCartao(null, EstadoPagamento.QUITADO,ped2,12);
+		ped2.setPagamento(pagto1);
+		Pagamento pagto2 = new PagamentoDinheiro(null,EstadoPagamento.PENDENTE,ped1,null);
+		ped1.setPagamento(pagto1);
 
 
 		enderecoRepository.saveAll(Arrays.asList(end1,end2));
@@ -118,6 +135,9 @@ public class DenguinhosPetShopApplication implements CommandLineRunner {
 		proprietarioRepository.saveAll(Arrays.asList(prop1,prop2));
 		categoriaRepository.saveAll(Arrays.asList(cat1,cat2,cat3));
 		itemRepository.saveAll(Arrays.asList(item1,item2,item3));
+		pagamentoRepository.saveAll(Arrays.asList(pagto1,pagto2));
+		pedidoRepository.saveAll(Arrays.asList(ped1,ped2));
+
 
 	}
 }

@@ -33,6 +33,8 @@ public class Proprietario {
      @CollectionTable(name = "Telefone")
      private Set<String> telefones = new HashSet<>();
 
+     @OneToMany(mappedBy = "proprietario")
+     private List<Pedido> pedidos = new ArrayList<>();
 
     public Proprietario(Integer id, String CPF, String nome, String email) {
         this.id = id;

@@ -52,7 +52,6 @@ public class Pet {
         this.nascimento = nascimento;
         this.especie_pet = especie_pet;
         this.enderecoEntrega = enderecoEntrega;
-
     }
 
     @Override
