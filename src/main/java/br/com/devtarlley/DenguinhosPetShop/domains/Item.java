@@ -6,7 +6,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.util.Objects;
+import java.util.*;
 
 @AllArgsConstructor @NoArgsConstructor
 @Getter @Setter
@@ -25,7 +25,15 @@ public class Item {
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
+    private Set<ItemPedido> itens = new HashSet<>();
 
+    public List<Pedido> getPedidos(){
+        List<Pedido> lista = new ArrayList<>();
+        for (ItemPedido x : itens){
+            lista.add(x.getPedido());
+        }
+        return lista;
+    }
 
     @Override
     public boolean equals(Object o) {

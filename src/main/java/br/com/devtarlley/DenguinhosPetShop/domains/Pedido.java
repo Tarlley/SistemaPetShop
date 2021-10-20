@@ -6,7 +6,9 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @NoArgsConstructor @AllArgsConstructor
 @Getter @Setter
@@ -31,6 +33,8 @@ public class Pedido {
      @ManyToOne
      @JoinColumn(name = "endereco_entrega_id")
      private Endereco endereco;
+
+     private Set<ItemPedido> itens = new HashSet<>();
 
      public Pedido(Integer id, Date instante, Proprietario proprietario, Endereco endereco) {
           this.id = id;
