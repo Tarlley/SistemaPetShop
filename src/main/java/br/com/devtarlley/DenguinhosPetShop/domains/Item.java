@@ -2,6 +2,7 @@ package br.com.devtarlley.DenguinhosPetShop.domains;
 
 
 import br.com.devtarlley.DenguinhosPetShop.domains.Enum.Tipo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -9,7 +10,7 @@ import javax.persistence.*;
 import java.util.*;
 
 @AllArgsConstructor @NoArgsConstructor
-@RequiredArgsConstructor
+
 @Getter @Setter
 @ToString
 @Entity
@@ -26,7 +27,18 @@ public class Item {
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "id.item")
+    @ToString.Exclude
     private Set<ItemPedido> itens = new HashSet<>();
+
+    public Item(Integer id, String nome, Double preco, Tipo tipo, Categoria categoria) {
+        this.id = id;
+        this.nome = nome;
+        this.preco = preco;
+        this.tipo = tipo;
+        this.categoria = categoria;
+    }
 
     public List<Pedido> getPedidos(){
         List<Pedido> lista = new ArrayList<>();

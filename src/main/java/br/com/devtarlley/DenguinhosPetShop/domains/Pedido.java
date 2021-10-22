@@ -1,6 +1,7 @@
 package br.com.devtarlley.DenguinhosPetShop.domains;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -34,6 +35,9 @@ public class Pedido {
      @JoinColumn(name = "endereco_entrega_id")
      private Endereco endereco;
 
+
+     @JsonIgnore
+     @OneToMany(mappedBy = "id.pedido")
      private Set<ItemPedido> itens = new HashSet<>();
 
      public Pedido(Integer id, Date instante, Proprietario proprietario, Endereco endereco) {

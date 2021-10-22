@@ -1,6 +1,7 @@
 package br.com.devtarlley.DenguinhosPetShop.domains;
 
 import br.com.devtarlley.DenguinhosPetShop.domains.Enum.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -19,6 +20,7 @@ public abstract class Pagamento {
     private Integer estado;
 
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "pedido_id")
     @MapsId

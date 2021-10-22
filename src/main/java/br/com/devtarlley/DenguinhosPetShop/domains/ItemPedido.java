@@ -1,20 +1,26 @@
 package br.com.devtarlley.DenguinhosPetShop.domains;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
 import java.util.Objects;
 
 @AllArgsConstructor @NoArgsConstructor
 @Getter @Setter
+@Entity
 public class ItemPedido {
 
     private Double desconto;
     private Integer quantidade;
     private Double preco;
 
+    @JsonIgnore
+    @EmbeddedId
     private ItemPedidoPK id = new ItemPedidoPK();
 
     public Pedido getPedido(){

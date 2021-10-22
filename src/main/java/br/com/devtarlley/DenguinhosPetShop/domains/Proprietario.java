@@ -2,6 +2,7 @@ package br.com.devtarlley.DenguinhosPetShop.domains;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -33,6 +34,7 @@ public class Proprietario {
      @CollectionTable(name = "Telefone")
      private Set<String> telefones = new HashSet<>();
 
+     @JsonIgnore
      @OneToMany(mappedBy = "proprietario")
      private List<Pedido> pedidos = new ArrayList<>();
 
