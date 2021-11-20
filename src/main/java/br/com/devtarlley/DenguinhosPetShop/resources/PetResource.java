@@ -1,15 +1,15 @@
 package br.com.devtarlley.DenguinhosPetShop.resources;
 
 import br.com.devtarlley.DenguinhosPetShop.domains.Pet;
+import br.com.devtarlley.DenguinhosPetShop.dto.PetDto;
 import br.com.devtarlley.DenguinhosPetShop.services.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/pets")
@@ -26,8 +26,20 @@ public class PetResource {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<?> findAll(){
-        List<Pet> object = service.findAll();
-        return ResponseEntity.ok().body(object);
+    public ResponseEntity<List<PetDto>> findAll(){
+
+        List<Pet> list = service.findAll();
+        List<PetDto> listDto = list.stream().map(obj -> new PetDto(obj))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok().body(listDto);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Void> update(@Valid @RequestBody Pet obj, @PathVariable Integer id){
+
+        obj.setId(id);
+        obj = service.update(obj);
+
+        return ResponseEntity.noContent().build();
     }
 }

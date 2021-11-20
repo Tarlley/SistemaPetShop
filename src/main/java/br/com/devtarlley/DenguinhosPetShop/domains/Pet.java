@@ -3,11 +3,14 @@ package br.com.devtarlley.DenguinhosPetShop.domains;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.sun.istack.NotNull;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +27,7 @@ public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotNull @NotBlank @NotEmpty
     private String nome;
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date nascimento;
