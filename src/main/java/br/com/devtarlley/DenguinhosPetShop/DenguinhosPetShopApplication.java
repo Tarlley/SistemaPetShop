@@ -105,8 +105,8 @@ public class DenguinhosPetShopApplication implements CommandLineRunner {
 		esp1.getPets().addAll(List.of(pet1));
 		esp2.getPets().addAll(List.of(pet2));
 
-		Proprietario prop1 = new Proprietario(null,"0123456789-10","Wendel Tarlley","wendel@wendel.com");
-		Proprietario prop2 = new Proprietario(null,"0198765432-10","Samanta Rocha","samanta@samanta.com");
+		Proprietario prop1 = new Proprietario(null,"267.929.710-57","Wendel Tarlley","wendel@wendel.com");
+		Proprietario prop2 = new Proprietario(null,"672.767.630-56","Samanta Rocha","samanta@samanta.com");
 
 		prop1.setTelefones(Collections.singleton("31999999999"));
 		prop2.getTelefones().addAll(Arrays.asList("31988888888","31977777777"));

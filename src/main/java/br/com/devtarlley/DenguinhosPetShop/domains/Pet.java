@@ -11,6 +11,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,11 +28,13 @@ public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @NotNull @NotBlank @NotEmpty
+    @NotNull
+    @NotBlank
+    @NotEmpty
+    @Size(min = 2, message = "Nome deve ter no minimo 5 caracteres")
     private String nome;
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date nascimento;
-
 
 
     @ManyToOne(cascade = CascadeType.PERSIST)
@@ -44,9 +47,9 @@ public class Pet {
     private List<Proprietario> proprietarios = new ArrayList<>();
 
 
-   @ManyToOne
-   @JoinColumn(name = "endereco_entrega_id")
-   private Endereco enderecoEntrega;
+    @ManyToOne
+    @JoinColumn(name = "endereco_entrega_id")
+    private Endereco enderecoEntrega;
 
 //4
 

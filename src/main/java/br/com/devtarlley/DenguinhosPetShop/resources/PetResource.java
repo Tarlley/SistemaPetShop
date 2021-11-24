@@ -29,13 +29,14 @@ public class PetResource {
     public ResponseEntity<List<PetDto>> findAll(){
 
         List<Pet> list = service.findAll();
-        List<PetDto> listDto = list.stream().map(obj -> new PetDto(obj))
+        List<PetDto> listDto = list.stream().map(PetDto::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok().body(listDto);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Void> update(@Valid @RequestBody Pet obj, @PathVariable Integer id){
+        //Pet obj = obj
 
         obj.setId(id);
         obj = service.update(obj);
