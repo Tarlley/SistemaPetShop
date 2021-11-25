@@ -57,6 +57,12 @@ public class Pet {
         this.enderecoEntrega = enderecoEntrega;
     }
 
+    public Pet(Integer id, String nome, Date nascimento) {
+        this.id = id;
+        this.nome = nome;
+        this.nascimento = nascimento;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

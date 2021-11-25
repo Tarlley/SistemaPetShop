@@ -26,11 +26,18 @@ public class PetService {
     }
 
     public Pet fromDto(PetDto objDto){
-        return new Pet(objDto.getId(),objDto.getNome(),objDto.getNascimento(),null,null);
+        return new Pet(objDto.getId(),objDto.getNome(),objDto.getNascimento());
     }
 
     public Pet update(Pet obj){
-        find(obj.getId());
-        return petRepository.save(obj);
+        Pet newObj = find(obj.getId());
+        updateData(newObj,obj);
+        return petRepository.save(newObj);
+    }
+
+    private void updateData(Pet newObj, Pet obj) {
+
+        newObj.setNome(obj.getNome());
+        newObj.setNascimento(obj.getNascimento());
     }
 }

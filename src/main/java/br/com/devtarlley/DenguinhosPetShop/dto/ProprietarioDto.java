@@ -22,6 +22,7 @@ public class ProprietarioDto {
     @NotEmpty
     @Size(min = 3, message = "Nome deve ter no minimo 3 caracteres")
     private String nome;
+    @NotNull
     @Email(message = "email deve ser preenchido")
     private String email;
 
