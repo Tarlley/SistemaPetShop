@@ -2,6 +2,9 @@ package br.com.devtarlley.DenguinhosPetShop.dto;
 
 import br.com.devtarlley.DenguinhosPetShop.domains.Proprietario;
 import lombok.*;
+import org.hibernate.validator.constraints.br.CPF;
+
+import javax.validation.constraints.*;
 
 
 @AllArgsConstructor
@@ -12,8 +15,14 @@ import lombok.*;
 public class ProprietarioDto {
 
     private Integer id;
+    @CPF(message = "Por faovr preencha um CPF válido")
     private String CPF;
+    @NotNull
+    @NotBlank
+    @NotEmpty
+    @Size(min = 3, message = "Nome deve ter no minimo 3 caracteres")
     private String nome;
+    @Email(message = "email deve ser preenchido")
     private String email;
 
 

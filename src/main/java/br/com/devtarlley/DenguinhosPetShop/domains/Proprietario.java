@@ -26,14 +26,8 @@ public class Proprietario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @CPF(message = "Por faovr preencha um CPF válido")
-    //@JsonFormat(pattern = "###.###.###-##")
     private String CPF;
-    @NotNull
-    @NotBlank
-    @NotEmpty
     private String nome;
-    @Email(message = "email deve ser preenchido")
     private String email;
 
 

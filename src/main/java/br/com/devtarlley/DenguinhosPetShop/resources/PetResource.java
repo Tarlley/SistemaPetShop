@@ -35,9 +35,8 @@ public class PetResource {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> update(@Valid @RequestBody Pet obj, @PathVariable Integer id){
-        //Pet obj = obj
-
+    public ResponseEntity<Void> update(@Valid @RequestBody PetDto objDto, @PathVariable Integer id){
+        Pet obj = service.fromDto(objDto);
         obj.setId(id);
         obj = service.update(obj);
 

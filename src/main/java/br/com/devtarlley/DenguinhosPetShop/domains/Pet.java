@@ -28,10 +28,6 @@ public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @NotNull
-    @NotBlank
-    @NotEmpty
-    @Size(min = 2, message = "Nome deve ter no minimo 5 caracteres")
     private String nome;
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date nascimento;

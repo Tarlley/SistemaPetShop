@@ -26,6 +26,8 @@ public class ProprietarioService {
     public List<Proprietario> findAll(){
         return proprietarioRepository.findAll();
     }
+
+
     public Proprietario update(Proprietario obj){
         find(obj.getId());
         return proprietarioRepository.save(obj);
