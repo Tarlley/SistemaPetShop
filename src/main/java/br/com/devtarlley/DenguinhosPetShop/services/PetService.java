@@ -48,8 +48,10 @@ public class PetService {
         Endereco endereco = new Endereco(null, objDto.getLogradouro(),
                 objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(),
                 objDto.getCep(), cidade);
-        endereco.getPets().add(pet);
 
+        enderecoRepository.saveAll(List.of(endereco));
+
+        pet.setEnderecoEntrega(endereco);
         return pet;
     }
 
@@ -63,7 +65,7 @@ public class PetService {
     public Pet insert(Pet obj) {
         obj.setId(null);
         obj = petRepository.save(obj);
-        enderecoRepository.save(obj.getEnderecoEntrega());
+//            enderecoRepository.save(obj.getEnderecoEntrega());
 
     return obj;
     }
