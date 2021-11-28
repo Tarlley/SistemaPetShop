@@ -21,13 +21,11 @@ public class Especie {
     private Integer id;
     private String nome;
 
+
+
+
     @JsonIgnore
-    @OneToMany(mappedBy = "especie_pet")
-    @ToString.Exclude
-    private List<Pet> pets = new ArrayList<>();
-
-
-    @OneToMany(mappedBy = "especie_raca")
+    @OneToMany(mappedBy = "especie")
     private List<Raca> racas = new ArrayList<>();
 
     public Especie(Integer id, String nome) {

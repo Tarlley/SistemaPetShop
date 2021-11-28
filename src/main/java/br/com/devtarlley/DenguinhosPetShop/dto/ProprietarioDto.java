@@ -15,14 +15,15 @@ import javax.validation.constraints.*;
 public class ProprietarioDto {
 
     private Integer id;
+    @NotNull
     @CPF(message = "Por faovr preencha um CPF válido")
     private String CPF;
     @NotNull
     @NotBlank
-    @NotEmpty
+    @NotEmpty(message = "Preenchimento obrigatório")
     @Size(min = 3, message = "Nome deve ter no minimo 3 caracteres")
     private String nome;
-    @NotNull
+    @NotEmpty(message = "Preenchimento obrigatório")
     @Email(message = "email deve ser preenchido")
     private String email;
 

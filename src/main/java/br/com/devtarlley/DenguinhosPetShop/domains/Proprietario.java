@@ -21,16 +21,19 @@ import java.util.*;
 @Setter
 @ToString
 @Entity
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = "cpf"),@UniqueConstraint(columnNames = "email")})
 public class Proprietario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column
     private String CPF;
     private String nome;
+    @Column
     private String email;
 
-
+    @JsonIgnore
     @ManyToMany
     @ToString.Exclude
     @JoinTable(name = "Proprietario_Pets",

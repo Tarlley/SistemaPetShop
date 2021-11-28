@@ -1,9 +1,7 @@
 package br.com.devtarlley.DenguinhosPetShop.resources;
 
-import br.com.devtarlley.DenguinhosPetShop.domains.Pet;
 import br.com.devtarlley.DenguinhosPetShop.domains.Proprietario;
 import br.com.devtarlley.DenguinhosPetShop.dto.ProprietarioDto;
-import br.com.devtarlley.DenguinhosPetShop.dto.ProprietarioNewDto;
 import br.com.devtarlley.DenguinhosPetShop.services.ProprietarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,14 +36,14 @@ public class ProprietarioResource {
 
      }
 
-//     @RequestMapping(method = RequestMethod.POST)
-//     public ResponseEntity<Void> insert(@Valid @ RequestBody ProprietarioNewDto objDto){
-//         Proprietario obj = service.fromDto(objDto);
-//         obj = service.insert(obj);
-//         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-//                 .path("/{idÇ").buildAndExpand(obj.getId()).toUri();
-//         return ResponseEntity.created(uri).build();
-//     }
+     @RequestMapping(method = RequestMethod.POST)
+     public ResponseEntity<Void> insert(@Valid @RequestBody ProprietarioDto objDto){
+         Proprietario obj = service.fromDto(objDto);
+         obj = service.insert(obj);
+         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                 .path("/{id}").buildAndExpand(obj.getId()).toUri();
+         return ResponseEntity.created(uri).build();
+     }
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
@@ -56,4 +54,11 @@ public class ProprietarioResource {
 
         return ResponseEntity.noContent().build();
     }
+    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    @ResponseBody
+    public ResponseEntity<Void> delete(@PathVariable Integer id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

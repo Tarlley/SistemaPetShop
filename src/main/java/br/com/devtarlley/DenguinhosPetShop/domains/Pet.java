@@ -34,9 +34,11 @@ public class Pet {
     private Date nascimento;
 
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "especie_pet_id")
-    private Especie especie_pet;
+
+
+    @ManyToOne
+    @JoinColumn(name = "raca_pet_id")
+    private Raca raca_pet;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "pets")
@@ -50,12 +52,12 @@ public class Pet {
 
 //4
 
-    public Pet(Integer id, String nome, Date nascimento, Especie especie_pet, Endereco enderecoEntrega) {
+    public Pet(Integer id, String nome, Date nascimento, Endereco enderecoEntrega, Raca raca_pet) {
         this.id = id;
         this.nome = nome;
         this.nascimento = nascimento;
-        this.especie_pet = especie_pet;
         this.enderecoEntrega = enderecoEntrega;
+        this.raca_pet = raca_pet;
     }
 
     public Pet(Integer id, String nome, Date nascimento) {

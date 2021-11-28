@@ -39,7 +39,7 @@ public class PetResource {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> insert(@Valid @ RequestBody PetNewDto objDto){
+    public ResponseEntity<Void> insert(@Valid @RequestBody PetNewDto objDto){
         Pet obj = service.fromDto(objDto);
         obj = service.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -53,6 +53,13 @@ public class PetResource {
         obj.setId(id);
         obj = service.update(obj);
 
+        return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    @ResponseBody
+    public ResponseEntity<Void> delete(@PathVariable Integer id){
+        service.delete(id);
         return ResponseEntity.noContent().build();
     }
 }

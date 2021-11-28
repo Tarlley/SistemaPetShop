@@ -77,4 +77,9 @@ public class PetService {
     }
 
 
+    public void delete(Integer id){
+        find(id);
+     petRepository.deleteById(id);
+    }
+
 }
