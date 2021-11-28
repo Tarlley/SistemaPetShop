@@ -1,6 +1,7 @@
 package br.com.devtarlley.DenguinhosPetShop.domains;
 
 
+import br.com.devtarlley.DenguinhosPetShop.domains.Enum.EstadoPagamento;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
@@ -75,4 +76,6 @@ public class Pet {
     public int hashCode() {
         return 0;
     }
+
 }
+

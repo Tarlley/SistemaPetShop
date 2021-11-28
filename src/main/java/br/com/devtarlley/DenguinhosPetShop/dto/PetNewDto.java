@@ -23,6 +23,8 @@ public class PetNewDto {
     private String bairro;
     private String cep;
 
+    private Integer especie;
+
     private Integer cidadeId;
 
 }

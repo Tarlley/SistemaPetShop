@@ -1,15 +1,9 @@
 package br.com.devtarlley.DenguinhosPetShop.services;
 
-import br.com.devtarlley.DenguinhosPetShop.domains.Cidade;
-import br.com.devtarlley.DenguinhosPetShop.domains.Endereco;
-import br.com.devtarlley.DenguinhosPetShop.domains.Pet;
-import br.com.devtarlley.DenguinhosPetShop.domains.Proprietario;
+import br.com.devtarlley.DenguinhosPetShop.domains.*;
 import br.com.devtarlley.DenguinhosPetShop.dto.PetDto;
 import br.com.devtarlley.DenguinhosPetShop.dto.PetNewDto;
-import br.com.devtarlley.DenguinhosPetShop.repository.CidadeRepository;
-import br.com.devtarlley.DenguinhosPetShop.repository.EnderecoRepository;
-import br.com.devtarlley.DenguinhosPetShop.repository.PetRepository;
-import br.com.devtarlley.DenguinhosPetShop.repository.ProprietarioRepository;
+import br.com.devtarlley.DenguinhosPetShop.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +22,9 @@ public class PetService {
     @Autowired
     private EnderecoRepository enderecoRepository;
 
+    @Autowired
+    private EspecieRepository especieRepository;
+
     public Pet find(Integer id) {
 
         Optional<Pet> object = petRepository.findById(id);
@@ -43,6 +40,8 @@ public class PetService {
     }
 
     public Pet fromDto(PetNewDto objDto) {
+     //   Especie especie = especieRepository.getById(objDto.getEspecie());
+
         Pet pet = new Pet(objDto.getId(), objDto.getNome(), objDto.getNascimento());
         Cidade cidade = cidadeRepository.getById(objDto.getCidadeId());
         Endereco endereco = new Endereco(null, objDto.getLogradouro(),
@@ -52,6 +51,7 @@ public class PetService {
         enderecoRepository.saveAll(List.of(endereco));
 
         pet.setEnderecoEntrega(endereco);
+      //  pet.setEspecie_pet(especie);
         return pet;
     }
 
@@ -75,4 +75,6 @@ public class PetService {
         newObj.setNome(obj.getNome());
         newObj.setNascimento(obj.getNascimento());
     }
+
+
 }
