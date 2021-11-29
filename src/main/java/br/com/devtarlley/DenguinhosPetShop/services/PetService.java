@@ -4,6 +4,7 @@ import br.com.devtarlley.DenguinhosPetShop.domains.*;
 import br.com.devtarlley.DenguinhosPetShop.dto.PetDto;
 import br.com.devtarlley.DenguinhosPetShop.dto.PetNewDto;
 import br.com.devtarlley.DenguinhosPetShop.repository.*;
+import br.com.devtarlley.DenguinhosPetShop.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,10 @@ public class PetService {
     public Pet find(Integer id) {
 
         Optional<Pet> object = petRepository.findById(id);
+
+        if(object.isEmpty()){
+            throw new ObjectNotFoundException("Objeto não encontrado! id: " + id);
+        }
         return object.orElse(null);
     }
 
