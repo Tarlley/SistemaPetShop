@@ -3,6 +3,7 @@ package br.com.devtarlley.DenguinhosPetShop.services;
 import br.com.devtarlley.DenguinhosPetShop.domains.Proprietario;
 import br.com.devtarlley.DenguinhosPetShop.dto.ProprietarioDto;
 import br.com.devtarlley.DenguinhosPetShop.repository.ProprietarioRepository;
+import br.com.devtarlley.DenguinhosPetShop.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,9 @@ public class ProprietarioService {
 
         Optional<Proprietario> object = proprietarioRepository.findById(id);
 
+        if(object.isEmpty()){
+            throw new ObjectNotFoundException("Objeto não encontrado! id: " + id);
+        }
         return object.orElse(null);
     }
 
