@@ -83,7 +83,7 @@ public class DenguinhosPetShopApplication implements CommandLineRunner {
 
 
 		Pet pet1 = new Pet(null,"doghinho",sdf.parse("01/01/2010"),end1,rac1);
-		Pet pet2 = new Pet(null,"Gatinho",sdf.parse("10/10/2020"),end2,rac1);
+		Pet pet2 = new Pet(null,"Gatinho",sdf.parse("10/10/2020"),end2,rac2);
 
 		rac1.getPets().addAll(List.of(pet1));
 		rac2.getPets().addAll(List.of(pet2));
