@@ -30,7 +30,7 @@ public class Proprietario {
     @Column
     private String CPF;
     private String nome;
-    @Column
+    @Column(unique = true)
     private String email;
 
     @JsonIgnore

@@ -1,9 +1,11 @@
 package br.com.devtarlley.DenguinhosPetShop.dto;
 
 import br.com.devtarlley.DenguinhosPetShop.domains.Proprietario;
+import br.com.devtarlley.DenguinhosPetShop.services.validation.ProprietarioInsert;
 import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
 
+import javax.persistence.Column;
 import javax.validation.constraints.*;
 
 
@@ -12,6 +14,7 @@ import javax.validation.constraints.*;
 @Getter @Setter
 @Data
 
+@ProprietarioInsert
 public class ProprietarioDto {
 
     private Integer id;
@@ -25,6 +28,7 @@ public class ProprietarioDto {
     private String nome;
     @NotEmpty(message = "Preenchimento obrigatório")
     @Email(message = "email deve ser preenchido")
+    @Column(unique = true)
     private String email;
 
 
