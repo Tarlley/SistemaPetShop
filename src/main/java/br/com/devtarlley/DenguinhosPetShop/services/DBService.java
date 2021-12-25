@@ -88,6 +88,7 @@ public class DBService {
         Categoria cat1 = new Categoria(null,"Ração");
         Categoria cat2 = new Categoria(null,"Serviços");
         Categoria cat3 = new Categoria(null,"Medicamento");
+        Categoria cat4 = new Categoria(null,"Medicamento2");
 
         Item item1 = new Item(null,"Ração 1kg",15.00, Tipo.PRODUTO,cat1);
         Item item2 = new Item(null,"Dipirona",7.45,Tipo.PRODUTO,cat3);
