@@ -2,6 +2,7 @@ package br.com.devtarlley.DenguinhosPetShop.resources;
 
 import br.com.devtarlley.DenguinhosPetShop.domains.Proprietario;
 import br.com.devtarlley.DenguinhosPetShop.dto.ProprietarioDto;
+import br.com.devtarlley.DenguinhosPetShop.dto.ProprietarioNewDto;
 import br.com.devtarlley.DenguinhosPetShop.services.ProprietarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +38,7 @@ public class ProprietarioResource {
      }
 
      @RequestMapping(method = RequestMethod.POST)
-     public ResponseEntity<Void> insert(@Valid @RequestBody ProprietarioDto objDto){
+     public ResponseEntity<Void> insert(@Valid @RequestBody ProprietarioNewDto objDto){
          Proprietario obj = service.fromDto(objDto);
          obj = service.insert(obj);
          URI uri = ServletUriComponentsBuilder.fromCurrentRequest()

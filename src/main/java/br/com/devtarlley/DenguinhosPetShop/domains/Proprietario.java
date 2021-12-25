@@ -30,7 +30,7 @@ public class Proprietario {
     @Column
     private String CPF;
     private String nome;
-    @Column(unique = true)
+
     private String email;
 
     @JsonIgnore
@@ -52,6 +52,12 @@ public class Proprietario {
     public Proprietario(Integer id, String CPF, String nome, String email) {
         this.id = id;
         this.CPF = CPF;
+        this.nome = nome;
+        this.email = email;
+    }
+
+    public Proprietario(Integer id, String nome, String email) {
+        this.id = id;
         this.nome = nome;
         this.email = email;
     }

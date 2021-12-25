@@ -1,27 +1,27 @@
 package br.com.devtarlley.DenguinhosPetShop.dto;
 
-import br.com.devtarlley.DenguinhosPetShop.domains.Proprietario;
 import br.com.devtarlley.DenguinhosPetShop.services.validation.ProprietarioInsert;
 import br.com.devtarlley.DenguinhosPetShop.services.validation.ProprietarioUpdate;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.Column;
 import javax.validation.constraints.*;
-
+import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter @Setter
+@Getter
+@Setter
 @Data
-
-@ProprietarioUpdate
-public class ProprietarioDto {
+@ProprietarioInsert
+public class ProprietarioNewDto {
 
     private Integer id;
-//    @NotNull
-//    @CPF(message = "Por faovr preencha um CPF válido")
-//    private String CPF;
+    @NotNull
+    @org.hibernate.validator.constraints.br.CPF(message = "Por faovr preencha um CPF válido")
+    private String CPF;
     @NotNull
     @NotBlank
     @NotEmpty(message = "Preenchimento obrigatório")
@@ -31,13 +31,5 @@ public class ProprietarioDto {
     @Email(message = "email deve ser preenchido")
     @Column(unique = true)
     private String email;
-
-
-    public ProprietarioDto(Proprietario obj){
-        id = obj.getId();
-        nome = obj.getNome();
-//        CPF = obj.getCPF();
-        email = obj.getEmail();
-    }
 
 }

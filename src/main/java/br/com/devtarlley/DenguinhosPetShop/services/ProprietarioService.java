@@ -2,6 +2,7 @@ package br.com.devtarlley.DenguinhosPetShop.services;
 
 import br.com.devtarlley.DenguinhosPetShop.domains.Proprietario;
 import br.com.devtarlley.DenguinhosPetShop.dto.ProprietarioDto;
+import br.com.devtarlley.DenguinhosPetShop.dto.ProprietarioNewDto;
 import br.com.devtarlley.DenguinhosPetShop.repository.ProprietarioRepository;
 import br.com.devtarlley.DenguinhosPetShop.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,9 +43,12 @@ public class ProprietarioService {
     }
 
     public Proprietario fromDto(ProprietarioDto objDto){
+        return new Proprietario(objDto.getId(), objDto.getNome(), objDto.getEmail());
+    }
+
+    public Proprietario fromDto(ProprietarioNewDto objDto){
 
         return new Proprietario(objDto.getId(),objDto.getCPF(),objDto.getNome(), objDto.getEmail());
-
     }
 
     public void delete(Integer id){
