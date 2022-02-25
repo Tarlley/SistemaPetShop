@@ -2,41 +2,52 @@ package br.com.devtarlley.DenguinhosPetShop.domains;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.*;
 
-@AllArgsConstructor @NoArgsConstructor
-@Getter @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @ToString
 @Entity
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = "cpf"),@UniqueConstraint(columnNames = "email")})
 public class Proprietario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column
     private String CPF;
     private String nome;
+
     private String email;
 
-
+    @JsonIgnore
     @ManyToMany
     @ToString.Exclude
     @JoinTable(name = "Proprietario_Pets",
-    joinColumns = @JoinColumn(name = "proprietario_id"),
-    inverseJoinColumns = @JoinColumn(name = "pets_id"))
+            joinColumns = @JoinColumn(name = "proprietario_id"),
+            inverseJoinColumns = @JoinColumn(name = "pets_id"))
     private List<Pet> pets = new ArrayList<>();
 
-     @ElementCollection
-     @CollectionTable(name = "Telefone")
-     private Set<String> telefones = new HashSet<>();
+    @ElementCollection
+    @CollectionTable(name = "Telefone")
+    private Set<String> telefones = new HashSet<>();
 
-     @JsonIgnore
-     @OneToMany(mappedBy = "proprietario")
-     private List<Pedido> pedidos = new ArrayList<>();
+    @JsonIgnore
+    @OneToMany(mappedBy = "proprietario")
+    private List<Pedido> pedidos = new ArrayList<>();
 
     public Proprietario(Integer id, String CPF, String nome, String email) {
         this.id = id;
@@ -44,6 +55,19 @@ public class Proprietario {
         this.nome = nome;
         this.email = email;
     }
+
+    public Proprietario(Integer id, String nome, String email) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+    }
+//    public Proprietario(Integer id, String CPF, String nome, String email, Set<String> telefones) {
+//        this.id = id;
+//        this.CPF = CPF;
+//        this.nome = nome;
+//        this.email = email;
+//        this.telefones = getTelefones();
+//    }
 
     @Override
     public boolean equals(Object o) {

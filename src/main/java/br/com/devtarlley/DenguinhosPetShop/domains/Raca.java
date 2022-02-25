@@ -5,6 +5,8 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @AllArgsConstructor @NoArgsConstructor
@@ -19,10 +21,21 @@ public class Raca {
     private String nome;
 
 
-    @JsonIgnore
+
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "especie_raca_id")
-    private Especie especie_raca;
+    @JoinColumn(name = "especie_id")
+    private Especie especie;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "raca_pet")
+    private List<Pet> pets = new ArrayList<>();
+
+    public Raca(Integer id, String nome, Especie especie) {
+        this.id = id;
+        this.nome = nome;
+        this.especie = especie;
+
+    }
 
     @Override
     public boolean equals(Object o) {

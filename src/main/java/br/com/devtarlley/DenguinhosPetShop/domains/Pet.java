@@ -1,13 +1,18 @@
 package br.com.devtarlley.DenguinhosPetShop.domains;
 
 
+import br.com.devtarlley.DenguinhosPetShop.domains.Enum.EstadoPagamento;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.sun.istack.NotNull;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,9 +35,10 @@ public class Pet {
 
 
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "especie_pet_id")
-    private Especie especie_pet;
+
+    @ManyToOne
+    @JoinColumn(name = "raca_pet_id")
+    private Raca raca_pet;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "pets")
@@ -40,18 +46,24 @@ public class Pet {
     private List<Proprietario> proprietarios = new ArrayList<>();
 
 
-   @ManyToOne
-   @JoinColumn(name = "endereco_entrega_id")
-   private Endereco enderecoEntrega;
+    @ManyToOne
+    @JoinColumn(name = "endereco_entrega_id")
+    private Endereco enderecoEntrega;
 
 //4
 
-    public Pet(Integer id, String nome, Date nascimento, Especie especie_pet, Endereco enderecoEntrega) {
+    public Pet(Integer id, String nome, Date nascimento, Endereco enderecoEntrega, Raca raca_pet) {
         this.id = id;
         this.nome = nome;
         this.nascimento = nascimento;
-        this.especie_pet = especie_pet;
         this.enderecoEntrega = enderecoEntrega;
+        this.raca_pet = raca_pet;
+    }
+
+    public Pet(Integer id, String nome, Date nascimento) {
+        this.id = id;
+        this.nome = nome;
+        this.nascimento = nascimento;
     }
 
     @Override
@@ -66,4 +78,6 @@ public class Pet {
     public int hashCode() {
         return 0;
     }
+
 }
+

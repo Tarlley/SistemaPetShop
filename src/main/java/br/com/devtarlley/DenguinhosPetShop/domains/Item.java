@@ -39,6 +39,11 @@ public class Item {
         this.tipo = tipo;
         this.categoria = categoria;
     }
+    public Item(Integer id, String nome, Double preco) {
+        this.id = id;
+        this.nome = nome;
+        this.preco = preco;
+    }
 
     public List<Pedido> getPedidos(){
         List<Pedido> lista = new ArrayList<>();
