@@ -14,9 +14,9 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>DenguinhosPetShop</name>
 	<description>Projeto para um sistema de PET SHOP</description>
-<!--	<properties>-->
-<!--		<java.version>11</java.version>-->
-<!--	</properties>-->
+	<properties>
+		<java.version>11</java.version>
+	</properties>
 	<dependencies>
 
 		<dependency>
