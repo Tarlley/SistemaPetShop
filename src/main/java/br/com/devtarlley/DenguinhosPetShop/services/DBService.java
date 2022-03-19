@@ -78,11 +78,11 @@ public class DBService {
         Pet pet1 = new Pet(null,"doghinho",sdf.parse("01/01/2010"),end1,rac1);
         Pet pet2 = new Pet(null,"Gatinho",sdf.parse("10/10/2020"),end2,rac2);
 
-        rac1.getPets().addAll(List.of(pet1));
-        rac2.getPets().addAll(List.of(pet2));
+        rac1.getPets().addAll(Collections.singletonList(pet1));
+        rac2.getPets().addAll(Collections.singletonList(pet2));
 
-        esp1.getRacas().addAll(List.of(rac1));
-        esp2.getRacas().addAll(List.of(rac2));
+        esp1.getRacas().addAll(Collections.singletonList(rac1));
+        esp2.getRacas().addAll(Collections.singletonList(rac2));
 
 
         Categoria cat1 = new Categoria(null,"Ração");
@@ -94,28 +94,28 @@ public class DBService {
         Item item2 = new Item(null,"Dipirona",7.45,Tipo.PRODUTO,cat3);
         Item item3 = new Item(null,"Banho e tosa cão pequeno",25.00,Tipo.SERVICO,cat2);
 
-        est1.getCidades().addAll(List.of(cid2));
-        est2.getCidades().addAll(List.of(cid1));
+        est1.getCidades().addAll(Collections.singletonList(cid2));
+        est2.getCidades().addAll(Collections.singletonList(cid1));
 
-        cid1.getEnderecos().addAll(List.of(end2));
-        cid2.getEnderecos().addAll(List.of(end1));
+        cid1.getEnderecos().addAll(Collections.singletonList(end2));
+        cid2.getEnderecos().addAll(Collections.singletonList(end1));
 
         estadoRepository.saveAll(Arrays.asList(est1,est2));
         cidadeRepository.saveAll(Arrays.asList(cid1,cid2));
 
-        end1.getPets().addAll(List.of(pet1));
-        end2.getPets().addAll(List.of(pet2));
+        end1.getPets().addAll(Collections.singletonList(pet1));
+        end2.getPets().addAll(Collections.singletonList(pet2));
 
         Proprietario prop1 = new Proprietario(null,"267.929.710-57","Wendel Tarlley","wendel@wendel.com");
         Proprietario prop2 = new Proprietario(null,"672.767.630-56","Samanta Rocha","samanta@samanta.com");
 
         prop1.setTelefones(Collections.singleton("31999999999"));
         prop2.getTelefones().addAll(Arrays.asList("31988888888","31977777777"));
-        prop1.getPets().addAll(List.of(pet1));
-        prop2.getPets().addAll(List.of(pet2));
+        prop1.getPets().addAll(Collections.singletonList(pet1));
+        prop2.getPets().addAll(Collections.singletonList(pet2));
 
-        pet1.getProprietarios().addAll(List.of(prop1));
-        pet2.getProprietarios().addAll(List.of(prop2));
+        pet1.getProprietarios().addAll(Collections.singletonList(prop1));
+        pet2.getProprietarios().addAll(Collections.singletonList(prop2));
 
         Date dataAtual = new Date();
         String nowDate = sdf.format(dataAtual);

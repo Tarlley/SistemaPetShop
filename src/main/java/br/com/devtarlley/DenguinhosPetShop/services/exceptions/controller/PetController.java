@@ -1,10 +1,9 @@
-package br.com.devtarlley.DenguinhosPetShop.resources;
+package br.com.devtarlley.DenguinhosPetShop.services.exceptions.controller;
 
-import br.com.devtarlley.DenguinhosPetShop.domains.Pet;
 import br.com.devtarlley.DenguinhosPetShop.domains.Pet;
 import br.com.devtarlley.DenguinhosPetShop.dto.PetDto;
 import br.com.devtarlley.DenguinhosPetShop.dto.PetNewDto;
-import br.com.devtarlley.DenguinhosPetShop.services.PetService;
+import br.com.devtarlley.DenguinhosPetShop.services.impl.PetServiceimpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,10 +16,10 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/pets")
-public class PetResource {
+public class PetController {
 
     @Autowired
-    private PetService service;
+    private PetServiceimpl service;
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     public ResponseEntity<?> find(@PathVariable Integer id){

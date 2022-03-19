@@ -1,8 +1,8 @@
-package br.com.devtarlley.DenguinhosPetShop.resources;
+package br.com.devtarlley.DenguinhosPetShop.services.exceptions.controller;
 
 
 import br.com.devtarlley.DenguinhosPetShop.domains.Pedido;
-import br.com.devtarlley.DenguinhosPetShop.services.PedidoService;
+import br.com.devtarlley.DenguinhosPetShop.services.impl.PedidoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,11 +14,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/pedidos")
-public class PedidoResource {
+public class PedidoController {
 
 
     @Autowired
-    private PedidoService service;
+    private PedidoServiceImpl service;
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     public ResponseEntity<?> find(@PathVariable Integer id){

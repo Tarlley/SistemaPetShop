@@ -1,4 +1,4 @@
-package br.com.devtarlley.DenguinhosPetShop.resources.exceptions;
+package br.com.devtarlley.DenguinhosPetShop.services.exceptions.controller.exceptions;
 
 import br.com.devtarlley.DenguinhosPetShop.services.exceptions.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;

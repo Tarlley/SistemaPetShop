@@ -1,4 +1,4 @@
-package br.com.devtarlley.DenguinhosPetShop.services;
+package br.com.devtarlley.DenguinhosPetShop.services.impl;
 
 import br.com.devtarlley.DenguinhosPetShop.domains.Pedido;
 import br.com.devtarlley.DenguinhosPetShop.repository.PedidoRepository;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PedidoService {
+public class PedidoServiceImpl {
 
 
     @Autowired

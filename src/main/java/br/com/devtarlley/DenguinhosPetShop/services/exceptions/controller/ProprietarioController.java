@@ -1,9 +1,9 @@
-package br.com.devtarlley.DenguinhosPetShop.resources;
+package br.com.devtarlley.DenguinhosPetShop.services.exceptions.controller;
 
 import br.com.devtarlley.DenguinhosPetShop.domains.Proprietario;
 import br.com.devtarlley.DenguinhosPetShop.dto.ProprietarioDto;
 import br.com.devtarlley.DenguinhosPetShop.dto.ProprietarioNewDto;
-import br.com.devtarlley.DenguinhosPetShop.services.ProprietarioService;
+import br.com.devtarlley.DenguinhosPetShop.services.impl.ProprietarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,10 +16,10 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/proprietarios")
-public class ProprietarioResource {
+public class ProprietarioController {
 
      @Autowired
-     private ProprietarioService service;
+     private ProprietarioServiceImpl service;
 
      @RequestMapping(value = "/{id}", method = RequestMethod.GET)
      public ResponseEntity<?> find(@PathVariable Integer id){

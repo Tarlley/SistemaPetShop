@@ -1,4 +1,4 @@
-package br.com.devtarlley.DenguinhosPetShop.services;
+package br.com.devtarlley.DenguinhosPetShop.services.impl;
 
 import br.com.devtarlley.DenguinhosPetShop.domains.Proprietario;
 import br.com.devtarlley.DenguinhosPetShop.dto.ProprietarioDto;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ProprietarioService {
+public class ProprietarioServiceImpl {
 
     @Autowired
     private ProprietarioRepository proprietarioRepository;
