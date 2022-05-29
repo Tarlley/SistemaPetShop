@@ -1,4 +1,4 @@
-package br.com.devtarlley.DenguinhosPetShop.resources.exceptions;
+package br.com.devtarlley.DenguinhosPetShop.controller.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

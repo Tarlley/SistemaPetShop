@@ -1,10 +1,10 @@
-package br.com.devtarlley.DenguinhosPetShop.resources;
+package br.com.devtarlley.DenguinhosPetShop.controller;
 
-import br.com.devtarlley.DenguinhosPetShop.domains.Pet;
 import br.com.devtarlley.DenguinhosPetShop.domains.Pet;
 import br.com.devtarlley.DenguinhosPetShop.dto.PetDto;
 import br.com.devtarlley.DenguinhosPetShop.dto.PetNewDto;
 import br.com.devtarlley.DenguinhosPetShop.services.PetService;
+import br.com.devtarlley.DenguinhosPetShop.services.impl.PetServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,14 +22,12 @@ public class PetResource {
     @Autowired
     private PetService service;
 
-    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    @GetMapping("{id}")
     public ResponseEntity<?> find(@PathVariable Integer id){
-
-        Pet object = service.find(id);
-        return ResponseEntity.ok().body(object);
+        return ResponseEntity.ok().body(service.find(id));
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public ResponseEntity<List<PetDto>> findAll(){
 
         List<Pet> list = service.findAll();
@@ -38,7 +36,7 @@ public class PetResource {
         return ResponseEntity.ok().body(listDto);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping
     public ResponseEntity<Void> insert(@Valid @RequestBody PetNewDto objDto){
         Pet obj = service.fromDto(objDto);
         obj = service.insert(obj);
@@ -47,7 +45,7 @@ public class PetResource {
         return ResponseEntity.created(uri).build();
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @PutMapping("/{id}")
     public ResponseEntity<Void> update(@Valid @RequestBody PetNewDto objDto, @PathVariable Integer id){
         Pet obj = service.fromDto(objDto);
         obj.setId(id);
@@ -56,7 +54,7 @@ public class PetResource {
         return ResponseEntity.noContent().build();
     }
 
-    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    @DeleteMapping("/{id}")
     @ResponseBody
     public ResponseEntity<Void> delete(@PathVariable Integer id){
         service.delete(id);

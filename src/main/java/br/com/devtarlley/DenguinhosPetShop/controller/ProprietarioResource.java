@@ -1,9 +1,10 @@
-package br.com.devtarlley.DenguinhosPetShop.resources;
+package br.com.devtarlley.DenguinhosPetShop.controller;
 
 import br.com.devtarlley.DenguinhosPetShop.domains.Proprietario;
 import br.com.devtarlley.DenguinhosPetShop.dto.ProprietarioDto;
 import br.com.devtarlley.DenguinhosPetShop.dto.ProprietarioNewDto;
 import br.com.devtarlley.DenguinhosPetShop.services.ProprietarioService;
+import br.com.devtarlley.DenguinhosPetShop.services.impl.ProprietarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

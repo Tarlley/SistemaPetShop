@@ -1,8 +1,9 @@
-package br.com.devtarlley.DenguinhosPetShop.resources;
+package br.com.devtarlley.DenguinhosPetShop.controller;
 
 
 import br.com.devtarlley.DenguinhosPetShop.domains.Pedido;
 import br.com.devtarlley.DenguinhosPetShop.services.PedidoService;
+import br.com.devtarlley.DenguinhosPetShop.services.impl.PedidoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
