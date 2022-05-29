@@ -1,11 +1,10 @@
 package br.com.devtarlley.DenguinhosPetShop.services.impl;
 
 import br.com.devtarlley.DenguinhosPetShop.domains.*;
-import br.com.devtarlley.DenguinhosPetShop.dto.PetDto;
-import br.com.devtarlley.DenguinhosPetShop.dto.PetNewDto;
+import br.com.devtarlley.DenguinhosPetShop.domains.dto.PetDto;
+import br.com.devtarlley.DenguinhosPetShop.domains.dto.PetNewDto;
 import br.com.devtarlley.DenguinhosPetShop.repository.*;
 import br.com.devtarlley.DenguinhosPetShop.services.PetService;
-import br.com.devtarlley.DenguinhosPetShop.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

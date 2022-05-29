@@ -1,8 +1,8 @@
 package br.com.devtarlley.DenguinhosPetShop.services;
 
 import br.com.devtarlley.DenguinhosPetShop.domains.Proprietario;
-import br.com.devtarlley.DenguinhosPetShop.dto.ProprietarioDto;
-import br.com.devtarlley.DenguinhosPetShop.dto.ProprietarioNewDto;
+import br.com.devtarlley.DenguinhosPetShop.domains.dto.ProprietarioDto;
+import br.com.devtarlley.DenguinhosPetShop.domains.dto.ProprietarioNewDto;
 
 import java.util.List;
 

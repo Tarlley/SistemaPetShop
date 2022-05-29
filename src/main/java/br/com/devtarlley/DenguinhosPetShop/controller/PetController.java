@@ -1,10 +1,9 @@
 package br.com.devtarlley.DenguinhosPetShop.controller;
 
 import br.com.devtarlley.DenguinhosPetShop.domains.Pet;
-import br.com.devtarlley.DenguinhosPetShop.dto.PetDto;
-import br.com.devtarlley.DenguinhosPetShop.dto.PetNewDto;
+import br.com.devtarlley.DenguinhosPetShop.domains.dto.PetDto;
+import br.com.devtarlley.DenguinhosPetShop.domains.dto.PetNewDto;
 import br.com.devtarlley.DenguinhosPetShop.services.PetService;
-import br.com.devtarlley.DenguinhosPetShop.services.impl.PetServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +16,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/pets")
-public class PetResource {
+public class PetController {
 
     @Autowired
     private PetService service;

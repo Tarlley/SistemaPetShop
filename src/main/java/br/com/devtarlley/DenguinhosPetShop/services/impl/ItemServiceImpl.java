@@ -1,7 +1,7 @@
 package br.com.devtarlley.DenguinhosPetShop.services.impl;
 
 import br.com.devtarlley.DenguinhosPetShop.domains.Item;
-import br.com.devtarlley.DenguinhosPetShop.dto.ItemDto;
+import br.com.devtarlley.DenguinhosPetShop.domains.dto.ItemDto;
 import br.com.devtarlley.DenguinhosPetShop.repository.ItemRepository;
 import br.com.devtarlley.DenguinhosPetShop.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;

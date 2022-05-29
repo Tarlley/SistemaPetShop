@@ -1,10 +1,9 @@
 package br.com.devtarlley.DenguinhosPetShop.controller;
 
 import br.com.devtarlley.DenguinhosPetShop.domains.Proprietario;
-import br.com.devtarlley.DenguinhosPetShop.dto.ProprietarioDto;
-import br.com.devtarlley.DenguinhosPetShop.dto.ProprietarioNewDto;
+import br.com.devtarlley.DenguinhosPetShop.domains.dto.ProprietarioDto;
+import br.com.devtarlley.DenguinhosPetShop.domains.dto.ProprietarioNewDto;
 import br.com.devtarlley.DenguinhosPetShop.services.ProprietarioService;
-import br.com.devtarlley.DenguinhosPetShop.services.impl.ProprietarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +16,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/proprietarios")
-public class ProprietarioResource {
+public class ProprietarioController {
 
      @Autowired
      private ProprietarioService service;

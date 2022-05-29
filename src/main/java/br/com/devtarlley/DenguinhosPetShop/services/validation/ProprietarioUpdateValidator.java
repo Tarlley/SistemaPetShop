@@ -1,7 +1,7 @@
 package br.com.devtarlley.DenguinhosPetShop.services.validation;
 
 import br.com.devtarlley.DenguinhosPetShop.domains.Proprietario;
-import br.com.devtarlley.DenguinhosPetShop.dto.ProprietarioDto;
+import br.com.devtarlley.DenguinhosPetShop.domains.dto.ProprietarioDto;
 import br.com.devtarlley.DenguinhosPetShop.repository.ProprietarioRepository;
 import br.com.devtarlley.DenguinhosPetShop.controller.exceptions.FieldMessage;
 import org.springframework.beans.factory.annotation.Autowired;

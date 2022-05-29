@@ -1,4 +1,4 @@
-package br.com.devtarlley.DenguinhosPetShop.dto;
+package br.com.devtarlley.DenguinhosPetShop.domains.dto;
 
 import br.com.devtarlley.DenguinhosPetShop.domains.Item;
 import lombok.*;
