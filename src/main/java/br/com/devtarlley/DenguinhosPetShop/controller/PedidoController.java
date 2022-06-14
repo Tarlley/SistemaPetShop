@@ -1,4 +1,4 @@
-package br.com.devtarlley.DenguinhosPetShop.resources;
+package br.com.devtarlley.DenguinhosPetShop.controller;
 
 
 import br.com.devtarlley.DenguinhosPetShop.domains.Pedido;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/pedidos")
-public class PedidoResource {
+public class PedidoController {
 
 
     @Autowired

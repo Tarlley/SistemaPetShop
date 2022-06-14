@@ -1,7 +1,7 @@
 package br.com.devtarlley.DenguinhosPetShop.services.validation;
 
-import br.com.devtarlley.DenguinhosPetShop.dto.PetNewDto;
-import br.com.devtarlley.DenguinhosPetShop.resources.exceptions.FieldMessage;
+import br.com.devtarlley.DenguinhosPetShop.domains.dto.PetNewDto;
+import br.com.devtarlley.DenguinhosPetShop.controller.exceptions.FieldMessage;
 
 import java.util.ArrayList;
 import java.util.List;
