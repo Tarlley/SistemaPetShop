@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/itens")
+@RequestMapping(value = "/api/itens")
 public class ItemController {
 
 

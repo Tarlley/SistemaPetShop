@@ -2,31 +2,37 @@ package br.com.devtarlley.DenguinhosPetShop.services.impl;
 
 import br.com.devtarlley.DenguinhosPetShop.domains.Proprietario;
 import br.com.devtarlley.DenguinhosPetShop.domains.dto.ProprietarioDto;
-import br.com.devtarlley.DenguinhosPetShop.domains.dto.ProprietarioNewDto;
+import br.com.devtarlley.DenguinhosPetShop.mapper.ProprietarioMapper;
 import br.com.devtarlley.DenguinhosPetShop.repository.ProprietarioRepository;
 import br.com.devtarlley.DenguinhosPetShop.services.ProprietarioService;
-import br.com.devtarlley.DenguinhosPetShop.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ProprietarioServiceImpl implements ProprietarioService {
+    private final ProprietarioMapper proprietarioMapper;
 
     @Autowired
     private ProprietarioRepository proprietarioRepository;
 
-    @Override
-    public Proprietario find(Integer id){
+    public ProprietarioServiceImpl(ProprietarioMapper proprietarioMapper) {
+        this.proprietarioMapper = proprietarioMapper;
+    }
 
+    @Override
+    public ResponseEntity<?> find(Integer id){
         Optional<Proprietario> object = proprietarioRepository.findById(id);
 
         if(object.isEmpty()){
-            throw new ObjectNotFoundException("Objeto não encontrado! id: " + id);
+           return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Objeto não encontrado! id: " + id);
         }
-        return object.orElse(null);
+        return ResponseEntity.status(HttpStatus.OK).body(object.orElse(null));
     }
 
     @Override
@@ -42,20 +48,9 @@ public class ProprietarioServiceImpl implements ProprietarioService {
     }
 
     @Override
-    public Proprietario insert(Proprietario obj) {
-        obj.setId(null);
-        return proprietarioRepository.save(obj);
-    }
-
-    @Override
-    public Proprietario fromDto(ProprietarioDto objDto){
-        return new Proprietario(objDto.getId(), objDto.getNome(), objDto.getEmail());
-    }
-
-    @Override
-    public Proprietario fromDto(ProprietarioNewDto objDto){
-
-        return new Proprietario(objDto.getId(),objDto.getCPF(),objDto.getNome(), objDto.getEmail());
+    @Transactional
+    public ResponseEntity<Integer> salvarProprietario(ProprietarioDto proprietarioDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(proprietarioRepository.saveAndFlush(proprietarioMapper.toEntity(proprietarioDto)).getId());
     }
 
     @Override

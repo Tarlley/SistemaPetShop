@@ -18,15 +18,9 @@ public class PetDto {
     @NotNull
     @NotBlank
     @NotEmpty
-    @Size(min = 3, message = "Nome deve ter no minimo 3 caracteres")
+    @Size(min = 2, message = "Nome deve ter no minimo 2 caracteres")
     private String nome;
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date nascimento;
 
-
-    public PetDto(Pet obj){
-        id = obj.getId();
-        nome = obj.getNome();
-        nascimento = obj.getNascimento();
-    }
 }

@@ -2,24 +2,16 @@ package br.com.devtarlley.DenguinhosPetShop.services;
 
 import br.com.devtarlley.DenguinhosPetShop.domains.Pet;
 import br.com.devtarlley.DenguinhosPetShop.domains.dto.PetDto;
-import br.com.devtarlley.DenguinhosPetShop.domains.dto.PetNewDto;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface PetService {
-    Pet find(Integer id);
+    ResponseEntity<?> find(Integer id);
 
-    List<Pet> findAll();
+    ResponseEntity<List<Pet>> findAll();
 
-    Pet fromDto(PetDto objDto);
-
-    Pet fromDto(PetNewDto objDto);
-
-    Pet update(Pet obj);
-
-    Pet insert(Pet obj);
-
-    void updateData(Pet newObj, Pet obj);
+    ResponseEntity<?> salvarPet(PetDto petDto);
 
     void delete(Integer id);
 }

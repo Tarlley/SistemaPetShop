@@ -2,22 +2,18 @@ package br.com.devtarlley.DenguinhosPetShop.services;
 
 import br.com.devtarlley.DenguinhosPetShop.domains.Proprietario;
 import br.com.devtarlley.DenguinhosPetShop.domains.dto.ProprietarioDto;
-import br.com.devtarlley.DenguinhosPetShop.domains.dto.ProprietarioNewDto;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface ProprietarioService {
-    Proprietario find(Integer id);
+    ResponseEntity<?> find(Integer id);
 
     List<Proprietario> findAll();
 
     Proprietario update(Proprietario obj);
 
-    Proprietario insert(Proprietario obj);
-
-    Proprietario fromDto(ProprietarioDto objDto);
-
-    Proprietario fromDto(ProprietarioNewDto objDto);
+    ResponseEntity<Integer> salvarProprietario(ProprietarioDto proprietarioDto);
 
     void delete(Integer id);
 }

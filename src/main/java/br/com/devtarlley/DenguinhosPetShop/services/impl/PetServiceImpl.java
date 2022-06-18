@@ -2,92 +2,66 @@ package br.com.devtarlley.DenguinhosPetShop.services.impl;
 
 import br.com.devtarlley.DenguinhosPetShop.domains.*;
 import br.com.devtarlley.DenguinhosPetShop.domains.dto.PetDto;
-import br.com.devtarlley.DenguinhosPetShop.domains.dto.PetNewDto;
+import br.com.devtarlley.DenguinhosPetShop.mapper.PetMapper;
 import br.com.devtarlley.DenguinhosPetShop.repository.*;
 import br.com.devtarlley.DenguinhosPetShop.services.PetService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class PetServiceImpl implements PetService {
 
-    @Autowired
-    private PetRepository petRepository;
+    private final PetMapper petMapper;
+    private final PetRepository petRepository;
 
-    @Autowired
-    private CidadeRepository cidadeRepository;
+    private final CidadeRepository cidadeRepository;
 
-    @Autowired
-    private EnderecoRepository enderecoRepository;
+    private final EnderecoRepository enderecoRepository;
 
-    @Autowired
-    private EspecieRepository especieRepository;
+    private final EspecieRepository especieRepository;
+
+    public PetServiceImpl(PetMapper petMapper, PetRepository petRepository, CidadeRepository cidadeRepository, EnderecoRepository enderecoRepository, EspecieRepository especieRepository) {
+        this.petMapper = petMapper;
+        this.petRepository = petRepository;
+        this.cidadeRepository = cidadeRepository;
+        this.enderecoRepository = enderecoRepository;
+        this.especieRepository = especieRepository;
+    }
 
     @Override
-    public Pet find(Integer id) {
+    public ResponseEntity<?> find(Integer id) {
 
         Optional<Pet> object = petRepository.findById(id);
 
         if(object.isEmpty()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Pet não encontrado. Id: " + id);
+           return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pet não encontrado. Id: " + id);
         }
-        return object.orElse(null);
+        return ResponseEntity.status(HttpStatus.OK).body(object.orElse(null));
     }
 
     @Override
-    public List<Pet> findAll() {
-        return petRepository.findAll();
+    public ResponseEntity<List<Pet>> findAll() {
+
+        return ResponseEntity.status(HttpStatus.OK).body(petRepository.findAll());
     }
 
+    @Transactional
     @Override
-    public Pet fromDto(PetDto objDto) {
-        return new Pet(objDto.getId(), objDto.getNome(), objDto.getNascimento());
-    }
-
-    @Override
-    public Pet fromDto(PetNewDto objDto) {
-     //   Especie especie = especieRepository.getById(objDto.getEspecie());
-
-        Pet pet = new Pet(objDto.getId(), objDto.getNome(), objDto.getNascimento());
-        Cidade cidade = cidadeRepository.getById(objDto.getCidadeId());
-        Endereco endereco = new Endereco(null, objDto.getLogradouro(),
-                objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(),
-                objDto.getCep(), cidade);
-
-        enderecoRepository.saveAll(List.of(endereco));
-
-        pet.setEnderecoEntrega(endereco);
-      //  pet.setEspecie_pet(especie);
-        return pet;
-    }
-
-
-    @Override
-    public Pet update(Pet obj) {
-        Pet newObj = find(obj.getId());
-        updateData(newObj, obj);
-        return petRepository.save(newObj);
-    }
-
-    @Override
-    public Pet insert(Pet obj) {
-        obj.setId(null);
-        obj = petRepository.save(obj);
+    public ResponseEntity<?> salvarPet(PetDto petDto) {
+        Pet pet;
+        try{
+          pet = petRepository.saveAndFlush(petMapper.toEntity(petDto));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Não foi possível salvar o Pet");
+        }
 //            enderecoRepository.save(obj.getEnderecoEntrega());
 
-    return obj;
-    }
-
-    @Override
-    public void updateData(Pet newObj, Pet obj) {
-
-        newObj.setNome(obj.getNome());
-        newObj.setNascimento(obj.getNascimento());
+    return ResponseEntity.status(HttpStatus.OK).body(pet.getId());
     }
 
     @Override

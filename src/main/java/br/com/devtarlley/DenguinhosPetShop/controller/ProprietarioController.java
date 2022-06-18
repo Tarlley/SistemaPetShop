@@ -1,10 +1,11 @@
 package br.com.devtarlley.DenguinhosPetShop.controller;
 
-import br.com.devtarlley.DenguinhosPetShop.domains.Proprietario;
 import br.com.devtarlley.DenguinhosPetShop.domains.dto.ProprietarioDto;
-import br.com.devtarlley.DenguinhosPetShop.domains.dto.ProprietarioNewDto;
+import br.com.devtarlley.DenguinhosPetShop.mapper.ProprietarioMapper;
 import br.com.devtarlley.DenguinhosPetShop.services.ProprietarioService;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -12,51 +13,46 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/proprietarios")
+@RequestMapping(value = "/api/proprietarios")
+@Api(value = "API REST Pet")
+@CrossOrigin(origins = "*")
 public class ProprietarioController {
 
-     @Autowired
-     private ProprietarioService service;
+    private final ProprietarioMapper proprietarioMapper;
+     private final ProprietarioService service;
 
-     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-     public ResponseEntity<?> find(@PathVariable Integer id){
+    public ProprietarioController(ProprietarioMapper proprietarioMapper, ProprietarioService service) {
+        this.proprietarioMapper = proprietarioMapper;
+        this.service = service;
+    }
 
-         Proprietario object = service.find(id);
-         return ResponseEntity.ok().body(object);
+    @GetMapping("/{id}")
+    @ApiOperation(value = "Retorna um proprietario pelo id informado pelo usuario")
+    public ResponseEntity<?> find(@PathVariable Integer id){
+        return service.find(id);
      }
 
-     @RequestMapping(method = RequestMethod.GET)
+     @GetMapping
+     @ApiOperation(value = "Retorna uma lista de proprietario ")
      public ResponseEntity<?> findAll(){
-         List<Proprietario> list = service.findAll();
-         List<ProprietarioDto> listDto = list.stream().map(ProprietarioDto::new)
-                 .collect(Collectors.toList());
-             return ResponseEntity.ok().body(listDto);
+         List<ProprietarioDto> listDto = proprietarioMapper.toDto(service.findAll());
+             return ResponseEntity.status(HttpStatus.OK).body(listDto);
 
      }
 
      @RequestMapping(method = RequestMethod.POST)
-     public ResponseEntity<Void> insert(@Valid @RequestBody ProprietarioNewDto objDto){
-         Proprietario obj = service.fromDto(objDto);
-         obj = service.insert(obj);
+     @ApiOperation(value = "Salva um novo proprietario")
+     public ResponseEntity<Void> salvarProprietario(@Valid @RequestBody ProprietarioDto proprietarioDto){
          URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                 .path("/{id}").buildAndExpand(obj.getId()).toUri();
+                 .path("/{id}").buildAndExpand(service.salvarProprietario(proprietarioDto)).toUri();
          return ResponseEntity.created(uri).build();
      }
 
-
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> update(@Valid @RequestBody ProprietarioDto objDto, @PathVariable Integer id){
-        Proprietario obj = service.fromDto(objDto);
-        obj.setId(id);
-        obj = service.update(obj);
-
-        return ResponseEntity.noContent().build();
-    }
-    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    @DeleteMapping("/{id}")
     @ResponseBody
+    @ApiOperation(value = "Deleta um proprietario pelo Id informado")
     public ResponseEntity<Void> delete(@PathVariable Integer id){
         service.delete(id);
         return ResponseEntity.noContent().build();

@@ -1,60 +1,51 @@
 package br.com.devtarlley.DenguinhosPetShop.controller;
 
-import br.com.devtarlley.DenguinhosPetShop.domains.Pet;
 import br.com.devtarlley.DenguinhosPetShop.domains.dto.PetDto;
-import br.com.devtarlley.DenguinhosPetShop.domains.dto.PetNewDto;
 import br.com.devtarlley.DenguinhosPetShop.services.PetService;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/pets")
+@RequestMapping(value = "/api/pets")
+@Api(value = "API REST Pet")
+@CrossOrigin(origins = "*")
 public class PetController {
 
-    @Autowired
-    private PetService service;
+    private final PetService service;
 
-    @GetMapping("{id}")
-    public ResponseEntity<?> find(@PathVariable Integer id){
-        return ResponseEntity.ok().body(service.find(id));
+    public PetController(PetService service) {
+        this.service = service;
+    }
+
+    @GetMapping("/{id}")
+    @ApiOperation(value = "Retorna um Pet pelo id informado pelo usuario")
+    public ResponseEntity<?> findById(@PathVariable Integer id){
+        return service.find(id);
     }
 
     @GetMapping
-    public ResponseEntity<List<PetDto>> findAll(){
-
-        List<Pet> list = service.findAll();
-        List<PetDto> listDto = list.stream().map(PetDto::new)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok().body(listDto);
+    @ApiOperation(value = "Retorna uma lista de Pet ")
+    public ResponseEntity<?> findAll(){
+        return service.findAll();
     }
 
     @PostMapping
-    public ResponseEntity<Void> insert(@Valid @RequestBody PetNewDto objDto){
-        Pet obj = service.fromDto(objDto);
-        obj = service.insert(obj);
+    @ApiOperation(value = "Salva um novo Pet")
+    public ResponseEntity<Void> salvarPet(@Valid @RequestBody PetDto petDto){
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}").buildAndExpand(obj.getId()).toUri();
+                .path("/{id}").buildAndExpand(service.salvarPet(petDto).getBody()).toUri();
         return ResponseEntity.created(uri).build();
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@Valid @RequestBody PetNewDto objDto, @PathVariable Integer id){
-        Pet obj = service.fromDto(objDto);
-        obj.setId(id);
-        obj = service.update(obj);
-
-        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
     @ResponseBody
+    @ApiOperation(value = "Deleta um Pet pelo Id informado")
     public ResponseEntity<Void> delete(@PathVariable Integer id){
         service.delete(id);
         return ResponseEntity.noContent().build();
